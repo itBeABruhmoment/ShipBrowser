@@ -7,5 +7,16 @@
     "description": "a gui browser for ship hulls",
     "gameVersion": "0.95.1a-RC6",
     "jars":["jars/ShipBrowser.jar"],
-    "modPlugin":"ship_browser.plugins.ShipBrowserModPlugin"
+    "modPlugin":"ship_browser.plugins.ShipBrowserModPlugin",
+    "dependencies": [
+        {
+            "id": "lw_lazylib",
+            "name": "LazyLib",
+        },
+        {
+            "id": "lw_console",
+            "name": "Console Commands",
+        },
+        
+    ],
 }
