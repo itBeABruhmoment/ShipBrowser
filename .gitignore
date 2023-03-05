@@ -1,0 +1,9 @@
+/jars/ShipBrowserProject/gradle/*
+/jars/ShipBrowserProject/build/classes/
+/jars/ShipBrowserProject/build/generated/
+/jars/ShipBrowserProject/build/libs/
+/jars/ShipBrowserProject/build/tmp/
+/jars/ShipBrowserProject/local.properties
+/jars/ShipBrowserProject/.gradle/*
+/jars/ShipBrowserProject/.idea/*
+

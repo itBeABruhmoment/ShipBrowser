@@ -1,0 +1,11 @@
+{
+    "id": "bruh_ship_browser",
+    "name": "Ship Browser",
+    "author": "itBeABruhmoment",
+    "utility": "true",
+    "version": "0.1.0",
+    "description": "a gui browser for ship hulls",
+    "gameVersion": "0.95.1a-RC6",
+    "jars":["jars/ShipBrowser.jar"],
+    "modPlugin":"ship_browser.plugins.ShipBrowserModPlugin"
+}
