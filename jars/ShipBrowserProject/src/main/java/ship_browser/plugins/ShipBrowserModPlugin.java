@@ -1,6 +1,7 @@
 package ship_browser.plugins;
 
 import com.fs.starfarer.api.BaseModPlugin;
+import ship_browser.data.ShipData;
 
 /**
  * Notes
@@ -12,5 +13,8 @@ import com.fs.starfarer.api.BaseModPlugin;
 
 
 public class ShipBrowserModPlugin extends BaseModPlugin {
-
+    @Override
+    public void onApplicationLoad() {
+        ShipData.getInstance().loadData();
+    }
 }
