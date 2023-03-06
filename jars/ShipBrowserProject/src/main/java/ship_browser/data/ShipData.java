@@ -28,13 +28,14 @@ public class ShipData {
 
     private ModShipInfo createShipInfoFromCSV(final JSONArray csv) {
         final ModShipInfo shipInfoFromMod = new ModShipInfo();
+        log.info("----------------------" + csv.length());
         for(int i = 0; i < csv.length(); i++) {
             JSONObject hullRow = null;
             try {
                 hullRow = csv.getJSONObject(i);
             } catch (Exception e) {
                 log.info(e);
-                break;
+                continue;
             }
 
             String hullId = null;
@@ -51,12 +52,11 @@ public class ShipData {
                     case CAPITAL_SHIP:
                         shipInfoFromMod.capitals.add(hullId);
                         break;
-                    default:
+                    case FRIGATE:
                         shipInfoFromMod.frigates.add(hullId);
                 }
             } catch (Exception e) {
                 log.info(e);
-                break;
             }
         }
         return shipInfoFromMod;
