@@ -33,9 +33,9 @@ public class MainDialogPage implements DialogPage{
         final OptionPanelAPI optionsPanel = dialog.getOptionPanel();
         optionsPanel.clearOptions();
         // originally passed in this as second param but the game didn't like that
-        optionsPanel.addOption(EXIT, PAGE_OPTIONS.EXIT);
-        optionsPanel.addOption(NEXT_PAGE, PAGE_OPTIONS.NEXT);
-        optionsPanel.addOption(PREV_PAGE, PAGE_OPTIONS.PREV);
+        optionsPanel.addOption(EXIT, NonModOptions.EXIT);
+        optionsPanel.addOption(NEXT_PAGE, NonModOptions.NEXT);
+        optionsPanel.addOption(PREV_PAGE, NonModOptions.PREV);
         for(int i = currentPage * MAX_MODS_PER_PAGE; i < MAX_MODS_PER_PAGE && i < options.size(); i++) {
             final ModShipsDialogPage page = options.get(i);
             optionsPanel.addOption(page.getMod(), page);
@@ -44,7 +44,7 @@ public class MainDialogPage implements DialogPage{
 
     @Override
     public void optionSelected(final String optionText, final Object o) {
-        if(o instanceof PAGE_OPTIONS) { // exit, next page, or prev page chosen
+        if(o instanceof NonModOptions) { // exit, next page, or prev page chosen
             if(optionText.equals(EXIT)) {
                 shouldEnd = true;
             } else if(optionText.equals(NEXT_PAGE)) {
@@ -56,8 +56,6 @@ public class MainDialogPage implements DialogPage{
                 }
                 open();
             }
-        } else { // option to view ships of faction chosen
-            ((ModShipsDialogPage) o).open();
         }
     }
 
@@ -72,7 +70,7 @@ public class MainDialogPage implements DialogPage{
         }
     }
 
-    enum PAGE_OPTIONS {
+    enum NonModOptions {
         EXIT,
         PREV,
         NEXT

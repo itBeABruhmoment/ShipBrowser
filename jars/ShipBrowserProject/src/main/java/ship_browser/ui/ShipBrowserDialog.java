@@ -34,15 +34,16 @@ public class ShipBrowserDialog implements InteractionDialogPlugin {
 
     @Override
     public void optionSelected(String optionText, Object optionData) {
-        if(mainPage.ended()) {
-            dialog.dismiss();
+        if(optionData instanceof DialogPage) { // if the option is a DialogPage navigate to it
+            currentPage = (DialogPage) optionData;
+            currentPage.open();
+        } else { // otherwise the page is doing some operation within itself
+            currentPage.optionSelected(optionText, optionData);
         }
 
-        if(optionData instanceof DialogPage) {
-            currentPage = (DialogPage) optionData;
-            currentPage.optionSelected(optionText, optionData);
-        } else {
-            currentPage.optionSelected(optionText, optionData);
+        if(mainPage.ended()) {
+            dialog.dismiss();
+            return;
         }
     }
 
