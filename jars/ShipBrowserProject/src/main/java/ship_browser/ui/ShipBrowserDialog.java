@@ -9,17 +9,17 @@ import com.fs.starfarer.api.combat.EngagementResultAPI;
 import org.graalvm.compiler.nodes.calc.IntegerDivRemNode;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 public class ShipBrowserDialog implements InteractionDialogPlugin {
     private InteractionDialogAPI dialog = null;
     private OptionPanelAPI optionsPanel = null;
     private TextPanelAPI textPanel = null;
-
-    private enum Options {
-        MAIN,
-        EXIT
-    }
+    private MainDialogPage mainPage = null;
+    private DialogPage currentPage = null;
     @Override
     public void init(InteractionDialogAPI interactionDialogAPI) {
         this.dialog = interactionDialogAPI;
@@ -27,30 +27,22 @@ public class ShipBrowserDialog implements InteractionDialogPlugin {
         this.textPanel = dialog.getTextPanel();
 
         dialog.hideVisualPanel();
-        goToOption(Options.MAIN);
+        mainPage = new MainDialogPage(dialog);
+        currentPage = mainPage;
+        currentPage.open();
     }
 
-    private void goToOption(Options option) {
-        optionsPanel.clearOptions();
-        switch (option) {
-            case MAIN:
-                textPanel.addPara("Test paragraph");
-                // And give them some options on what to do next
-                optionsPanel.addOption("Exit", Options.EXIT);
-                break;
-            case EXIT:
-                dialog.dismiss();
-                break;
-        }
-    }
     @Override
-    public void optionSelected(String optionText, Object optionData)
-    {
-        textPanel.addParagraph(optionText, Color.CYAN);
-        if (optionData instanceof Options) {
-            goToOption(((Options) optionData));
+    public void optionSelected(String optionText, Object optionData) {
+        if(mainPage.ended()) {
+            dialog.dismiss();
+        }
+
+        if(optionData instanceof DialogPage) {
+            currentPage = (DialogPage) optionData;
+            currentPage.optionSelected(optionText, optionData);
         } else {
-            goToOption(Options.EXIT);
+            currentPage.optionSelected(optionText, optionData);
         }
     }
 
