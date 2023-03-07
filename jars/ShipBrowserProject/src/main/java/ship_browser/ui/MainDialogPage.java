@@ -47,7 +47,6 @@ public class MainDialogPage implements DialogPage{
         if(o instanceof PAGE_OPTIONS) { // exit, next page, or prev page chosen
             if(optionText.equals(EXIT)) {
                 shouldEnd = true;
-                open();
             } else if(optionText.equals(NEXT_PAGE)) {
                 currentPage++;
                 open();

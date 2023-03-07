@@ -22,6 +22,10 @@ public class ModShipInfo {
     public HashSet<String> cruisers = new HashSet<>();
     public HashSet<String> capitals = new HashSet<>();
 
+    public boolean isEmpty() {
+        return frigates.isEmpty() && destroyers.isEmpty() && cruisers.isEmpty() && capitals.isEmpty();
+    }
+
     @Override
     public String toString() {
         final JSONObject json = new JSONObject();

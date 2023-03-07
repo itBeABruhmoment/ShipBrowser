@@ -105,7 +105,7 @@ public class ShipData {
         final List<ModSpecAPI> enabledMods = Global.getSettings().getModManager().getEnabledModsCopy();
         for(final ModSpecAPI mod : enabledMods) {
             final ModShipInfo modShipInfo = createShipInfoForMod(mod);
-            if(modShipInfo != null) {
+            if(modShipInfo != null && !modShipInfo.isEmpty()) {
                 SHIP_DATA.put(modShipInfo.modId, modShipInfo);
             }
         }
