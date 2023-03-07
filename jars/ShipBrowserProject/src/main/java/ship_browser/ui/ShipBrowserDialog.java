@@ -43,7 +43,6 @@ public class ShipBrowserDialog implements InteractionDialogPlugin {
 
         if(mainPage.ended()) {
             dialog.dismiss();
-            return;
         }
     }
 

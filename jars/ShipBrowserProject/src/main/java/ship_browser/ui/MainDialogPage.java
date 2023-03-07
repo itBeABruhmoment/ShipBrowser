@@ -1,7 +1,10 @@
 package ship_browser.ui;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
 import com.fs.starfarer.api.campaign.OptionPanelAPI;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import ship_browser.data.ModShipInfo;
 import ship_browser.data.ShipData;
 
@@ -10,6 +13,10 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class MainDialogPage implements DialogPage{
+    private static final Logger log = Global.getLogger(MainDialogPage.class);
+    static {
+        log.setLevel(Level.ALL);
+    }
     private InteractionDialogAPI dialog = null;
     private ArrayList<ModShipsDialogPage> options = new ArrayList<>();
     private boolean shouldEnd = false;
@@ -24,6 +31,7 @@ public class MainDialogPage implements DialogPage{
         final ShipData shipsByMod = ShipData.getInstance();
         for(final ModShipInfo info : shipsByMod.SHIP_DATA.values()) {
             options.add(new ModShipsDialogPage(this, info, dialog));
+            log.info(info.modId);
         }
         Collections.sort(options, new ModShipsPageComparator());
     }
@@ -36,7 +44,7 @@ public class MainDialogPage implements DialogPage{
         optionsPanel.addOption(EXIT, NonModOptions.EXIT);
         optionsPanel.addOption(NEXT_PAGE, NonModOptions.NEXT);
         optionsPanel.addOption(PREV_PAGE, NonModOptions.PREV);
-        for(int i = currentPage * MAX_MODS_PER_PAGE; i < MAX_MODS_PER_PAGE && i < options.size(); i++) {
+        for(int i = currentPage * MAX_MODS_PER_PAGE; i < MAX_MODS_PER_PAGE * (currentPage + 1) && i < options.size(); i++) {
             final ModShipsDialogPage page = options.get(i);
             optionsPanel.addOption(page.getMod(), page);
         }
@@ -48,7 +56,13 @@ public class MainDialogPage implements DialogPage{
             if(optionText.equals(EXIT)) {
                 shouldEnd = true;
             } else if(optionText.equals(NEXT_PAGE)) {
-                currentPage++;
+                if(options.size() - currentPage * MAX_MODS_PER_PAGE > 0) {
+                    log.info(options.size());
+                    log.info(currentPage);
+                    log.info(currentPage * MAX_MODS_PER_PAGE);
+                    log.info(options.size() - currentPage * MAX_MODS_PER_PAGE);
+                    currentPage++;
+                }
                 open();
             } else if(optionText.equals(PREV_PAGE)) {
                 if(currentPage > 0) {
