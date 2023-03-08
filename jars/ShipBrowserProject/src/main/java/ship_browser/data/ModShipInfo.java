@@ -1,6 +1,9 @@
 package ship_browser.data;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.ShipHullSpecAPI;
+import com.fs.starfarer.api.loading.HullModSpecAPI;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
@@ -22,8 +25,37 @@ public class ModShipInfo {
     public HashSet<String> cruisers = new HashSet<>();
     public HashSet<String> capitals = new HashSet<>();
 
+    public void addSpecToAppropriateCategory(ShipHullSpecAPI spec) {
+        final ShipAPI.HullSize size = spec.getHullSize();
+        final String id = spec.getHullId();
+        switch (size) {
+            case DESTROYER:
+                log.info("added to d" + spec.getHullId());
+                destroyers.add(id);
+                break;
+            case CRUISER:
+                log.info("added to c" + spec.getHullId());
+                cruisers.add(id);
+                break;
+            case CAPITAL_SHIP:
+                log.info("added to b" + spec.getHullId());
+                capitals.add(id);
+                break;
+            case FRIGATE:
+                log.info("added to f" + spec.getHullId());
+                frigates.add(id);
+        }
+    }
+
     public boolean isEmpty() {
         return frigates.isEmpty() && destroyers.isEmpty() && cruisers.isEmpty() && capitals.isEmpty();
+    }
+
+    public void merge(ModShipInfo other) {
+        frigates.addAll(other.frigates);
+        destroyers.addAll(other.destroyers);
+        cruisers.addAll(other.cruisers);
+        capitals.addAll(other.capitals);
     }
 
     @Override
