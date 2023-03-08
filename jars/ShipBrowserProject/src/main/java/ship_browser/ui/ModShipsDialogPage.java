@@ -9,6 +9,7 @@ import com.fs.starfarer.api.fleet.FleetMemberType;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ship_browser.data.ModShipInfo;
+import com.fs.starfarer.api.impl.campaign.FleetEncounterContext;
 
 import java.util.*;
 
@@ -141,7 +142,17 @@ public class ModShipsDialogPage implements DialogPage, FleetMemberPickerListener
     @Override
     public void pickedFleetMembers(List<FleetMemberAPI> list) {
         for(final FleetMemberAPI member : list) {
-
+            // TODO: remember the clear smods bool
+            FleetEncounterContext.prepareShipForRecovery(
+                    member,
+                    true,
+                    true,
+                    true,
+                    1f,
+                    1f,
+                    new Random()
+            );
+            Global.getSector().getPlayerFleet().getFleetData().addFleetMember(member);
         }
         log.info("picked script");
     }
