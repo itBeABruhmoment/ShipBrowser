@@ -28,7 +28,6 @@ public class ShipData {
      * Store info on ships in
      */
     public final HashMap<String, ModShipInfo> SHIP_DATA = new HashMap<>();
-    public ModShipInfo NOT_INCLUDED_IN_SHIP_DATA = new ModShipInfo();
 
     private ModShipInfo createShipInfoFromShipsCSV(final JSONArray csv) {
         final ModShipInfo shipInfoFromMod = new ModShipInfo();
@@ -206,15 +205,10 @@ public class ShipData {
 
     public void loadData() {
         SHIP_DATA.clear();
-        NOT_INCLUDED_IN_SHIP_DATA  = new ModShipInfo();
-        NOT_INCLUDED_IN_SHIP_DATA.modId = "not categorized";
-
-        final ModShipInfo included = new ModShipInfo();
 
         final ModShipInfo baseGameShipInfo = loadBaseGameShipInfo();
         if(baseGameShipInfo != null) {
             SHIP_DATA.put(ModShipInfo.BASE_GAME_ID, baseGameShipInfo);
-            included.merge(baseGameShipInfo);
         }
 
         final List<ModSpecAPI> enabledMods = Global.getSettings().getModManager().getEnabledModsCopy();
@@ -222,7 +216,6 @@ public class ShipData {
             final ModShipInfo modShipInfo = createShipInfoForMod(mod);
             if(modShipInfo != null && !modShipInfo.isEmpty()) {
                 SHIP_DATA.put(modShipInfo.modId, modShipInfo);
-                included.merge(modShipInfo);
             }
         }
 
@@ -237,39 +230,10 @@ public class ShipData {
                     SHIP_DATA.put(modShipInfo.modId, modShipInfo);
                 }
                 modShipInfo.addSpecToAppropriateCategory(hullSpec);
-                included.addSpecToAppropriateCategory(hullSpec);
             }
         }
 
         log.info(toString());
-        log.info("inf271" + included.toString());
-
-        for(final ShipHullSpecAPI spec : Global.getSettings().getAllShipHullSpecs()) {
-            final ShipAPI.HullSize size = spec.getHullSize();
-            final String id = spec.getHullId();
-            switch (size) {
-                case DESTROYER:
-                    if(!included.destroyers.contains(id)) {
-                        NOT_INCLUDED_IN_SHIP_DATA.destroyers.add(id);
-                    }
-                    break;
-                case CRUISER:
-                    if(!included.cruisers.contains(id)) {
-                        NOT_INCLUDED_IN_SHIP_DATA.cruisers.add(id);
-                    }
-                    break;
-                case CAPITAL_SHIP:
-                    if(!included.capitals.contains(id)) {
-                        NOT_INCLUDED_IN_SHIP_DATA.capitals.add(id);
-                    }
-                    break;
-                case FRIGATE:
-                    if(!included.frigates.contains(id)) {
-                        NOT_INCLUDED_IN_SHIP_DATA.frigates.add(id);
-                    }
-            }
-        }
-        log.info("inf272" + NOT_INCLUDED_IN_SHIP_DATA.toString());
     }
 
     @Override

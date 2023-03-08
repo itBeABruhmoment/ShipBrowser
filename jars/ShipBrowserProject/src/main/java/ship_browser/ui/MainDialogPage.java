@@ -33,7 +33,6 @@ public class MainDialogPage implements DialogPage{
             options.add(new ModShipsDialogPage(this, info, dialog));
             log.info(info.modId);
         }
-        options.add(new ModShipsDialogPage(this, shipsByMod.NOT_INCLUDED_IN_SHIP_DATA, dialog));
         Collections.sort(options, new ModShipsPageComparator());
     }
 
