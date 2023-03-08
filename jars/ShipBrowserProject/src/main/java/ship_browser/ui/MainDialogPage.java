@@ -57,10 +57,6 @@ public class MainDialogPage implements DialogPage{
                 shouldEnd = true;
             } else if(optionText.equals(NEXT_PAGE)) {
                 if(options.size() - currentPage * MAX_MODS_PER_PAGE > 0) {
-                    log.info(options.size());
-                    log.info(currentPage);
-                    log.info(currentPage * MAX_MODS_PER_PAGE);
-                    log.info(options.size() - currentPage * MAX_MODS_PER_PAGE);
                     currentPage++;
                 }
                 open();
