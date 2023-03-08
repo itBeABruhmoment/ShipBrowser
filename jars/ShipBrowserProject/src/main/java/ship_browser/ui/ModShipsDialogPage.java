@@ -10,9 +10,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ship_browser.data.ModShipInfo;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class ModShipsDialogPage implements DialogPage, FleetMemberPickerListener {
     private static final Logger log = Global.getLogger(ModShipsDialogPage.class);
@@ -88,6 +86,7 @@ public class ModShipsDialogPage implements DialogPage, FleetMemberPickerListener
                 members.add(memberAPI);
             }
         }
+        Collections.sort(members, new CompareFleetMembers());
         return members;
     }
 
@@ -141,6 +140,9 @@ public class ModShipsDialogPage implements DialogPage, FleetMemberPickerListener
 
     @Override
     public void pickedFleetMembers(List<FleetMemberAPI> list) {
+        for(final FleetMemberAPI member : list) {
+
+        }
         log.info("picked script");
     }
 
@@ -154,5 +156,12 @@ public class ModShipsDialogPage implements DialogPage, FleetMemberPickerListener
         DESTROYERS,
         CRUISERS,
         CAPITALS
+    }
+
+    private static class CompareFleetMembers implements Comparator<FleetMemberAPI> {
+        @Override
+        public int compare(FleetMemberAPI o1, FleetMemberAPI o2) {
+            return o1.getShipName().compareToIgnoreCase(o2.getShipName());
+        }
     }
 }
