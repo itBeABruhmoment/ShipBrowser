@@ -62,7 +62,7 @@ public class ModShipsDialogPage implements DialogPage, FleetMemberPickerListener
     }
 
     public String getMod() {
-        return shipInfo.modId;
+        return shipInfo.getGUIName();
     }
 
     public ArrayList<FleetMemberAPI> createMembers(final ModShipInfo info, final DialogOptions shipSize) {

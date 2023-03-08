@@ -25,6 +25,18 @@ public class ModShipInfo {
     public HashSet<String> cruisers = new HashSet<>();
     public HashSet<String> capitals = new HashSet<>();
 
+    public String getGUIName() {
+        try {
+            if(modId.equals(BASE_GAME_ID)) {
+                return "Vanilla";
+            } else {
+                return Global.getSettings().getModManager().getModSpec(modId).getName();
+            }
+        } catch (Exception e) {
+            return modId + "error";
+        }
+    }
+
     public void addSpecToAppropriateCategory(ShipHullSpecAPI spec) {
         final ShipAPI.HullSize size = spec.getHullSize();
         final String id = spec.getHullId();
