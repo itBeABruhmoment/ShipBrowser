@@ -40,7 +40,7 @@ public class MainDialogPage implements DialogPage{
     public void open() {
         final OptionPanelAPI optionsPanel = dialog.getOptionPanel();
         optionsPanel.clearOptions();
-        // originally passed in this as second param but the game didn't like that
+        // originally passed in "this" as second param but the game didn't like that
         optionsPanel.addOption(EXIT, NonModOptions.EXIT);
         optionsPanel.addOption(NEXT_PAGE, NonModOptions.NEXT);
         optionsPanel.addOption(PREV_PAGE, NonModOptions.PREV);

@@ -168,7 +168,6 @@ public class ShipData {
 
         // extract the file name
         final String path = spec.getShipFilePath();
-        log.info(path);
         int firstSlashIdx = path.length() - 1;
         for(; firstSlashIdx >= 0; firstSlashIdx--) {
             if(path.charAt(firstSlashIdx) == '/' || path.charAt(firstSlashIdx) == '\\') {
@@ -182,7 +181,6 @@ public class ShipData {
         final SettingsAPI settings = Global.getSettings();
         final String fileName = path.substring(firstSlashIdx + 1);
         String modId = null;
-        log.info(fileName);
         try {
             settings.loadText("data/hulls/copy_skins/" + fileName, MOD_ID);
             modId = ModShipInfo.BASE_GAME_ID;
@@ -198,7 +196,6 @@ public class ShipData {
 
             }
         }
-        log.info(spec.getHullId() + " from " + modId);
 
         return modId;
     }

@@ -42,19 +42,15 @@ public class ModShipInfo {
         final String id = spec.getHullId();
         switch (size) {
             case DESTROYER:
-                log.info("added to d" + spec.getHullId());
                 destroyers.add(id);
                 break;
             case CRUISER:
-                log.info("added to c" + spec.getHullId());
                 cruisers.add(id);
                 break;
             case CAPITAL_SHIP:
-                log.info("added to b" + spec.getHullId());
                 capitals.add(id);
                 break;
             case FRIGATE:
-                log.info("added to f" + spec.getHullId());
                 frigates.add(id);
         }
     }
