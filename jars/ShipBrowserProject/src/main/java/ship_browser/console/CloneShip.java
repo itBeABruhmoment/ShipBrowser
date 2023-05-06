@@ -93,11 +93,6 @@ public class CloneShip implements BaseCommand
             return CommandResult.BAD_SYNTAX;
         }
 
-        if(individualArgs[0].length() == 0 || individualArgs[1].length() == 0)
-        {
-            return CommandResult.BAD_SYNTAX;
-        }
-
         int shipInFleetNumber = 0;
         int numClones = 0;
         try
