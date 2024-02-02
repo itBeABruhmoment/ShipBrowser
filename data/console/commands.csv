@@ -10,7 +10,7 @@ FindEntitiesByType,ship_browser.console.FindAllEntitiesByType,campaign,FindEntit
 AddHullMods,ship_browser.console.AddHullMods,campaign,"AddHullMods <shipSelection> <[hullModId1,hullModId2,hullModId3]>","Permanently adds the hull mods specified in the second argument to the ships specified in shipSelection. shipSelection can be a number (eg. 5), a range (eg, 5-10) or the word all. The numbers in ShipSelection  corresponds to the order ships appears in the fleet or refit screen. For example the fifth ship in the refit screen is ship 5. "
 AddDMods,ship_browser.console.AddDMods,campaign,AddDMods <shipSelection> <numDmods>,"Adds numDmods dmods to the ships specified by shipSelection. NumDmods is a number. shipSelection can be a number (eg. 5), a range (eg, 5-10) or the word all. The numbers in ShipSelection  corresponds to the order ships appears in the fleet or refit screen. For example the fifth ship in the refit screen is ship 5. Then second argument is a list of any number of hull mod ids separated by commas and enclosed by square brackets WITH NO SPACES. Hull mod ids can be found in hull_mods.csv"
 CloneShip,ship_browser.console.CloneShip,campaign,CloneShip <shipNumber> [numberOfClones],Clones a specified ship in the player fleet a specified number of times. If no number of clones is specified one is made. shipNumber corresponds to the order ships appears in the fleet or refit screen. For example the fifth ship in the refit screen is ship 5. numberOfClones is the number of copies that will be made.
-,,,,
+SaveVariant,ship_browser.console.SaveVariant,campaign,SaveVariant <shipSelection> <variantId>,
 ,,,,
 ,,,,
 ,,,,
