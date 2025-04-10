@@ -6,7 +6,6 @@ import com.fs.starfarer.api.campaign.OptionPanelAPI;
 import com.fs.starfarer.api.campaign.TextPanelAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.combat.EngagementResultAPI;
-import org.graalvm.compiler.nodes.calc.IntegerDivRemNode;
 
 import java.awt.*;
 import java.util.ArrayList;
